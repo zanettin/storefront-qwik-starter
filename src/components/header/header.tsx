@@ -1,12 +1,13 @@
 import { component$, useClientEffect$, useContext } from '@builder.io/qwik';
+
 import { APP_STATE } from '~/constants';
-import { getActiveCustomerQuery } from '~/graphql/queries';
 import { ActiveCustomer } from '~/types';
-import { execute } from '~/utils/api';
 import Cart from '../cart/Cart';
+import SearchBar from '../search-bar/SearchBar';
 import ShoppingBagIcon from '../icons/ShoppingBagIcon';
 import UserIcon from '../icons/UserIcon';
-import SearchBar from '../search-bar/SearchBar';
+import { execute } from '~/utils/api';
+import { getActiveCustomerQuery } from '~/graphql/queries';
 
 export default component$(() => {
 	const appState = useContext(APP_STATE);
@@ -27,7 +28,10 @@ export default component$(() => {
 			<header
 				class={`bg-gradient-to-r from-blue-700 to-indigo-900 shadow-lg transform shadow-xl sticky top-0 z-10 animate-dropIn`}
 			>
-				<div className="bg-zinc-100 text-gray-600 shadow-inner text-center text-sm py-1 px-2 xl:px-0">
+				<div
+					className="bg-zinc-100 text-gray-600 shadow-inner text-center text-sm py-1 px-2 xl:px-0"
+					style={{ height: '35px' }}
+				>
 					<div className="max-w-6xl mx-2 md:mx-auto flex items-center justify-between">
 						<div>
 							<p className="hidden sm:block">

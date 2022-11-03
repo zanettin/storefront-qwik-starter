@@ -1,10 +1,11 @@
-import { component$, mutable, useContext } from '@builder.io/qwik';
-import { Link, useLocation } from '@builder.io/qwik-city';
-import { APP_STATE } from '~/constants';
-import { adjustOrderLineMutation, removeOrderLineMutation } from '~/graphql/mutations';
 import { ActiveOrder, CurrencyCode } from '~/types';
-import { execute } from '~/utils/api';
+import { Link, useLocation } from '@builder.io/qwik-city';
+import { adjustOrderLineMutation, removeOrderLineMutation } from '~/graphql/mutations';
+import { component$, useContext } from '@builder.io/qwik';
+
+import { APP_STATE } from '~/constants';
 import Price from '../products/Price';
+import { execute } from '~/utils/api';
 
 export default component$<{
 	currencyCode: CurrencyCode;
@@ -36,7 +37,7 @@ export default component$<{
 										</Link>
 									</h3>
 									<Price
-										priceWithTax={mutable(line.linePriceWithTax)}
+										priceWithTax={line.linePriceWithTax}
 										currencyCode={currencyCode}
 										forcedClassName="ml-4"
 									></Price>

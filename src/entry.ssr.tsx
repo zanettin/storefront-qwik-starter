@@ -1,16 +1,30 @@
-import { renderToStream, RenderToStreamOptions } from '@builder.io/qwik/server';
-import { manifest } from '@qwik-client-manifest';
-import Root from './root';
-
 /**
- * Server-Side Render method to be called by a server.
+ * WHAT IS THIS FILE?
+ *
+ * SSR entry point, in all cases the application is render outside the browser, this
+ * entry point will be the common one.
+ *
+ * - Server (express, cloudflare...)
+ * - npm run start
+ * - npm run preview
+ * - npm run build
+ *
  */
+import { RenderToStreamOptions, renderToStream } from '@builder.io/qwik/server';
+
+import Root from './root';
+import { manifest } from '@qwik-client-manifest';
+
 export default function (opts: RenderToStreamOptions) {
-	// Render the Root component to a string
-	// Pass in the manifest that was generated from the client build
 	return renderToStream(<Root />, {
 		manifest,
 		...opts,
-		streaming: { inOrder: { strategy: 'auto', initialChunkSize: 0, minimunChunkSize: 0 } },
+		prefetchStrategy: {
+			implementation: {
+				linkInsert: null,
+				workerFetchInsert: null,
+				prefetchEvent: 'always',
+			},
+		},
 	});
 }

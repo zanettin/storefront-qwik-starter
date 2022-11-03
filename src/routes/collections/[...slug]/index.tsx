@@ -1,27 +1,27 @@
 import {
 	$,
-	component$,
-	mutable,
 	Resource,
 	SSRStreamBlock,
+	component$,
 	useClientEffect$,
 	useResource$,
 	useStore,
 } from '@builder.io/qwik';
-import { useLocation } from '@builder.io/qwik-city';
-import Breadcrumbs from '~/components/breadcrumbs/Breadcrumbs';
-import CollectionCard from '~/components/collection-card/CollectionCard';
-import Filters from '~/components/facet-filter-controls/Filters';
-import FiltersButton from '~/components/filters-button/FiltersButton';
-import ProductCard from '~/components/products/ProductCard';
+import { Collection, FacetWithValues, Search } from '~/types';
+import { changeUrlParamsWithoutRefresh, enableDisableFacetValues, groupFacetValues } from '~/utils';
 import {
 	getCollectionQuery,
 	searchQueryWithCollectionSlug,
 	searchQueryWithTerm,
 } from '~/graphql/queries';
-import { Collection, FacetWithValues, Search } from '~/types';
-import { changeUrlParamsWithoutRefresh, enableDisableFacetValues, groupFacetValues } from '~/utils';
+
+import Breadcrumbs from '~/components/breadcrumbs/Breadcrumbs';
+import CollectionCard from '~/components/collection-card/CollectionCard';
+import Filters from '~/components/facet-filter-controls/Filters';
+import FiltersButton from '~/components/filters-button/FiltersButton';
+import ProductCard from '~/components/products/ProductCard';
 import { execute } from '~/utils/api';
+import { useLocation } from '@builder.io/qwik-city';
 
 export default component$(() => {
 	const { params, query } = useLocation();
@@ -67,7 +67,7 @@ export default component$(() => {
 	});
 
 	const searchResource = useResource$<void>(async () => {
-		const { search } = !!activeFacetValueIds.length
+		const { search } = activeFacetValueIds.length
 			? await execute<{ search: Search }>(searchQueryWithTerm('', activeFacetValueIds))
 			: await execute<{ search: Search }>(searchQueryWithCollectionSlug(params.slug));
 		state.search = search;
@@ -80,7 +80,7 @@ export default component$(() => {
 			<div className="flex justify-between items-center">
 				<SSRStreamBlock>
 					<Resource
-						resource={collectionResource}
+						value={collectionResource}
 						onPending={() => <></>}
 						onResolved={(collection) => (
 							<h2 className="text-3xl sm:text-5xl font-light tracking-tight text-gray-900 my-8">
@@ -89,7 +89,7 @@ export default component$(() => {
 						)}
 					/>
 					<Resource
-						resource={searchResource}
+						value={searchResource}
 						onPending={() => <></>}
 						onResolved={() => (
 							<>
@@ -107,7 +107,7 @@ export default component$(() => {
 			</div>
 			<SSRStreamBlock>
 				<Resource
-					resource={collectionResource}
+					value={collectionResource}
 					onPending={() => <></>}
 					onResolved={(collection) => (
 						<>
@@ -128,14 +128,14 @@ export default component$(() => {
 					)}
 				/>
 				<Resource
-					resource={searchResource}
+					value={searchResource}
 					onPending={() => <></>}
 					onResolved={() => (
 						<div className="mt-6 grid sm:grid-cols-5 gap-x-4">
 							{!!state.facedValues.length && (
 								<Filters
-									showMenu={mutable(state.showMenu)}
-									facetsWithValues={mutable(state.facedValues)}
+									showMenu={state.showMenu}
+									facetsWithValues={state.facedValues}
 									onToggleMenu$={async () => {
 										state.showMenu = !state.showMenu;
 									}}
@@ -147,10 +147,10 @@ export default component$(() => {
 									{state.search.items.map((item) => (
 										<ProductCard
 											key={item.productId}
-											productAsset={mutable(item.productAsset)}
+											productAsset={item.productAsset}
 											productName={item.productName}
 											slug={item.slug}
-											priceWithTax={mutable(item.priceWithTax)}
+											priceWithTax={item.priceWithTax}
 											currencyCode={item.currencyCode}
 										></ProductCard>
 									))}

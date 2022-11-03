@@ -1,16 +1,17 @@
 import {
 	$,
-	component$,
-	mutable,
 	Resource,
 	SSRStreamBlock,
+	component$,
 	useClientEffect$,
 	useContext,
 	useResource$,
 	useStore,
 	useWatch$,
 } from '@builder.io/qwik';
-import { useLocation } from '@builder.io/qwik-city';
+import { ActiveOrder, Line, Product, Variant } from '~/types';
+
+import { APP_STATE } from '~/constants';
 import Alert from '~/components/alert/Alert';
 import Breadcrumbs from '~/components/breadcrumbs/Breadcrumbs';
 import CheckIcon from '~/components/icons/CheckIcon';
@@ -18,11 +19,10 @@ import HeartIcon from '~/components/icons/HeartIcon';
 import Price from '~/components/products/Price';
 import StockLevelLabel from '~/components/stock-level-label/StockLevelLabel';
 import TopReviews from '~/components/top-reviews/TopReviews';
-import { APP_STATE } from '~/constants';
 import { addItemToOrderMutation } from '~/graphql/mutations';
-import { getProductQuery } from '~/graphql/queries';
-import { ActiveOrder, Line, Product, Variant } from '~/types';
 import { execute } from '~/utils/api';
+import { getProductQuery } from '~/graphql/queries';
+import { useLocation } from '@builder.io/qwik-city';
 
 export default component$(() => {
 	const location = useLocation();
@@ -78,7 +78,7 @@ export default component$(() => {
 			<div className="max-w-6xl mx-auto px-4 py-10">
 				<SSRStreamBlock>
 					<Resource
-						resource={productResource}
+						value={productResource}
 						onPending={() => <></>}
 						onResolved={() => (
 							<>
@@ -136,8 +136,8 @@ export default component$(() => {
 										)}
 										<div className="mt-10 flex flex-col sm:flex-row sm:items-center">
 											<Price
-												priceWithTax={mutable(selectedVariant()?.priceWithTax)}
-												currencyCode={mutable(selectedVariant()?.currencyCode)}
+												priceWithTax={selectedVariant()?.priceWithTax}
+												currencyCode={selectedVariant()?.currencyCode}
 												forcedClassName="text-3xl text-gray-900 mr-4"
 											></Price>
 											<div className="flex sm:flex-col1 align-baseline">
