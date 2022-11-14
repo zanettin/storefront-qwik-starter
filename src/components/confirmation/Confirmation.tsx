@@ -1,4 +1,5 @@
-import { component$, PropFunction, useContext } from '@builder.io/qwik';
+import { PropFunction, component$, useContext } from '@builder.io/qwik';
+
 import { APP_STATE } from '~/constants';
 import CartContents from '../cart-contents/CartContents';
 import CartTotals from '../cart-totals/CartTotals';
@@ -7,7 +8,7 @@ import CheckCircleIcon from '../icons/CheckCircleIcon';
 export default component$<{ onForward$: PropFunction<() => void> }>(() => {
 	const appState = useContext(APP_STATE);
 	const currencyCode = appState.activeOrder?.currencyCode || 'USD';
-	const isEditable = location.pathname.startsWith('/checkout');
+	// const isEditable = location.pathname.startsWith('/checkout');
 	return (
 		<div>
 			<h2 className="text-3xl flex items-center space-x-2 sm:text-5xl font-light tracking-tight text-gray-900 my-8">

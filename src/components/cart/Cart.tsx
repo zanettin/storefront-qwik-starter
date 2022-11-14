@@ -1,9 +1,10 @@
 import { component$, useContext } from '@builder.io/qwik';
-import { useLocation } from '@builder.io/qwik-city';
+
 import { APP_STATE } from '~/constants';
 import CartContents from '../cart-contents/CartContents';
 import CartPrice from '../cart-totals/CartPrice';
 import CloseIcon from '../icons/CloseIcon';
+import { useLocation } from '@builder.io/qwik-city';
 
 export default component$(() => {
 	const location = useLocation();
@@ -65,7 +66,5 @@ export default component$(() => {
 				</div>
 			</div>
 		</div>
-	) : (
-		<></>
-	);
+	) : null;
 });

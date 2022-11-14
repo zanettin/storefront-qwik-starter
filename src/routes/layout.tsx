@@ -1,17 +1,18 @@
+import { ActiveOrder, AppState, Collection } from '~/types';
 import {
-	component$,
 	Slot,
+	component$,
 	useClientEffect$,
 	useContextProvider,
 	useServerMount$,
 	useStore,
 } from '@builder.io/qwik';
-import { APP_STATE } from '~/constants';
 import { getActiveOrderQuery, getCollectionsQuery } from '~/graphql/queries';
-import { ActiveOrder, AppState, Collection } from '~/types';
-import { execute } from '~/utils/api';
+
+import { APP_STATE } from '~/constants';
 import Footer from '../components/footer/footer';
 import Header from '../components/header/header';
+import { execute } from '~/utils/api';
 
 export default component$(() => {
 	const state = useStore<AppState>({
@@ -29,7 +30,6 @@ export default component$(() => {
 	});
 
 	useClientEffect$(async () => {
-		window.scrollTo(0, 0);
 		const { activeOrder } = await execute<{ activeOrder: ActiveOrder }>(getActiveOrderQuery());
 		state.activeOrder = activeOrder;
 	});

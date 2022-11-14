@@ -1,6 +1,7 @@
 import { component$, useContext } from '@builder.io/qwik';
-import CollectionCard from '~/components/collection-card/CollectionCard';
+
 import { APP_STATE } from '~/constants';
+import CollectionCard from '~/components/collection-card/CollectionCard';
 
 export const headerImage =
 	'https://readonlydemo.vendure.io/assets/preview/2f/mikkel-bech-748940-unsplash__preview.jpg';
@@ -50,8 +51,12 @@ export default component$(() => {
 				</div>
 			</div>
 
-			<section className="pt-24 sm:pt-32 xl:max-w-7xl xl:mx-auto xl:px-8">
-				<div className="px-4 sm:px-6 lg:px-8 xl:px-0">
+			<section className="pt-12 sm:pt-16 xl:max-w-7xl xl:mx-auto xl:px-8">
+				<div className="py-8 sm:py-6 lg:py-8 bg-slate-200 text-center">
+					<div id="apn-ad-slot-wb1" data-slot="WB_1" className="ad-slot"></div>
+				</div>
+
+				<div className="mt-12 px-4 sm:px-6 lg:px-8 xl:px-0">
 					<h2 className="text-2xl font-light tracking-tight text-gray-900">Shop by Category</h2>
 				</div>
 
@@ -67,6 +72,10 @@ export default component$(() => {
 							</div>
 						</div>
 					</div>
+				</div>
+
+				<div className="mt-12 py-8 sm:py-6 lg:py-8 bg-slate-200 text-center">
+					<div id="apn-ad-slot-wb2" data-slot="WB_1" className="ad-slot"></div>
 				</div>
 			</section>
 		</>

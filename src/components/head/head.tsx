@@ -1,7 +1,8 @@
-import { component$ } from '@builder.io/qwik';
 import { useDocumentHead, useLocation } from '@builder.io/qwik-city';
+
 import { Analytics } from './analytics';
 import { Social } from './social';
+import { component$ } from '@builder.io/qwik';
 
 export const Head = component$(() => {
 	const head = useDocumentHead();
@@ -29,6 +30,14 @@ export const Head = component$(() => {
 
 			<Social />
 			<Analytics loc={loc} />
+
+			{/* <!-- OneTrust CMP Builder start --> */}
+			<script
+				src="https://cmp-cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+				type="text/javascript"
+				data-cmp-builder-version="2.0.0"
+				data-domain-script="center-center-dark-global"
+			></script>
 		</head>
 	);
 });

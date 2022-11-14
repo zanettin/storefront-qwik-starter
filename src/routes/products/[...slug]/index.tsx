@@ -91,6 +91,11 @@ export default component$(() => {
 										[]
 									}
 								></Breadcrumbs>
+
+								<div className="mt-12 py-8 sm:py-6 lg:py-8 bg-slate-200 text-center">
+									<div id="apn-ad-slot-wb1" data-slot="WB_1" className="ad-slot"></div>
+								</div>
+
 								<div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start mt-4 md:mt-12">
 									<div className="w-full max-w-2xl mx-auto sm:block lg:max-w-none">
 										<span className="rounded-md overflow-hidden">

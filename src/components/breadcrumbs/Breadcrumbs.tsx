@@ -1,7 +1,7 @@
-import { component$ } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
 import HomeIcon from '../icons/HomeIcon';
+import { Link } from '@builder.io/qwik-city';
 import SlashIcon from '../icons/SlashIcon';
+import { component$ } from '@builder.io/qwik';
 
 export default component$<{ items: { name: string; slug: string; id: string }[] }>(({ items }) => {
 	return (
@@ -17,7 +17,7 @@ export default component$<{ items: { name: string; slug: string; id: string }[] 
 				</li>
 				{items
 					.filter((item) => item.name !== '__root_collection__')
-					.map((item, index) => (
+					.map((item) => (
 						<li key={item.name}>
 							<div className="flex items-center">
 								<SlashIcon />

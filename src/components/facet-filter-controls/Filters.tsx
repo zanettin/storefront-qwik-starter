@@ -1,6 +1,7 @@
-import { component$, PropFunction, useStore } from '@builder.io/qwik';
-import { FacetWithValues } from '~/types';
+import { PropFunction, component$, useStore } from '@builder.io/qwik';
+
 import CloseIcon from '../icons/CloseIcon';
+import { FacetWithValues } from '~/types';
 import MinusIcon from '../icons/MinusIcon';
 import PlusIcon from '../icons/PlusIcon';
 
@@ -35,7 +36,7 @@ export default component$<{
 										});
 									}}
 								>
-									{!!facet.open ? <MinusIcon /> : <PlusIcon />}
+									{facet.open ? <MinusIcon /> : <PlusIcon />}
 								</span>
 							</button>
 						</h3>
@@ -97,7 +98,7 @@ export default component$<{
 														);
 													}}
 												>
-													{!!facet.open ? <MinusIcon /> : <PlusIcon />}
+													{facet.open ? <MinusIcon /> : <PlusIcon />}
 												</span>
 											</button>
 										</h3>

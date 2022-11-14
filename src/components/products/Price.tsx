@@ -1,5 +1,5 @@
-import { component$ } from '@builder.io/qwik';
 import { CurrencyCode } from '~/types';
+import { component$ } from '@builder.io/qwik';
 import { formatPrice } from '~/utils';
 
 export default component$<{
@@ -8,7 +8,7 @@ export default component$<{
 	forcedClassName?: string;
 }>(({ priceWithTax, currencyCode, forcedClassName }: any) => {
 	if (priceWithTax == null || !currencyCode) {
-		return <div></div>;
+		return null;
 	}
 	if (typeof priceWithTax === 'number') {
 		return <div className={forcedClassName}>{formatPrice(priceWithTax, currencyCode)}</div>;
